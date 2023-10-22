@@ -6,19 +6,22 @@ module.exports = (sequelize) => {
          type: DataTypes.INTEGER,
          autoIncrement: true,
          primaryKey: true,
-         startAt: 860000
+         startAt: 950000
       },
       name: {
          type: DataTypes.STRING,
          allowNull: false
       },
-      requirements: {
-         type: DataTypes.JSON,
+      description: {
+         type: DataTypes.TEXT,
          allowNull: false,
       },
       platforms: {
          type: DataTypes.ARRAY(DataTypes.JSONB),
          allowNull: false,
+      },
+      requirements: {
+         type: DataTypes.JSON,
       },
       released: {
          type: DataTypes.STRING

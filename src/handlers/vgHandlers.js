@@ -1,17 +1,32 @@
-const { getVgByName, getAllVg } = require("../controllers/vgControllers");
+const { getVgByName, getAllVg, getVgById } = require("../controllers/vgControllers");
 
 const getVgHandler = async (req, res) => {
    const { name } = req.query;
    try {
       const result = name ? await getVgByName(name) : await getAllVg();
-      // console.log(result.length);
-      res.status(200).send(result);
+      result.length > 0 ?
+         res.status(200).send(result)
+         :
+         res.status(404).send({ message: "Not Found" });
    } catch (error) {
       res.status(500).send({ message: error.message });
    }
+};
 
+const getVgByIdHandler = async (req, res) => {
+   const { id } = req.params;
+   try {
+      const result = await getVgById(id);
+      result ?
+         res.status(200).send(result)
+         :
+         res.status(404).send({ message: "Not Found" });
+   } catch (error) {
+      res.status(500).send({ message: error.message });
+   }
 };
 
 module.exports = {
-   getVgHandler
+   getVgHandler,
+   getVgByIdHandler
 };

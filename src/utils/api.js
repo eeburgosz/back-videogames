@@ -15,11 +15,14 @@ const infoApiVg = async () => {
    let URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
    for (let i = 0; i < 5; i++) {
       const { results, next } = (await axios.get(URL)).data;
-      results.map(vg => {
+      results.map(async vg => {
+         const descURL = `https://api.rawg.io/api/games/${vg.id}?key=${API_KEY}`;
+         const descInfo = (await axios.get(descURL)).data;
          apiData.push({
             id: vg.id,
             img: vg.background_image,
             name: vg.name,
+            description: stripHTML(descInfo.description_raw || noInfo),
             requirements: {
                minimum: stripHTML(vg.platforms.find(platform =>
                   platform.requirements_en)?.requirements_en.minimum || noInfo),
@@ -38,6 +41,7 @@ const infoApiVg = async () => {
             genres: vg.genres.map(genre => genre.name)
          });
       });
+
       URL = next;
    }
    return apiData;
@@ -50,8 +54,8 @@ const infoApiGenres = async () => {
    return [...allGenres];
 };
 
-const infoApiPlatforms = () => {
-   const apiData = infoApiVg();
+const infoApiPlatforms = async () => {
+   const apiData = await infoApiVg();
    const allPlatforms = [];
    const platformsMap = new Map();
 
@@ -66,7 +70,6 @@ const infoApiPlatforms = () => {
 
    return allPlatforms;
 };
-
 
 module.exports = {
    infoApiVg,

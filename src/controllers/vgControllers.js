@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Videogames, Genres } = require("../db");
 const { infoApiVg } = require("../utils/api");
 
@@ -44,9 +45,32 @@ const getAllVg = async () => {
 };
 
 const getVgByName = async (name) => {
-
+   const exist = await Videogames.findAll({
+      where: {
+         name: {
+            [Op.iLike]: `%${name}%`
+         }
+      }, include: [
+         {
+            model: Genres,
+         }
+      ]
+   });
+   if (exist.length > 0) return exist;
+   else return [];
 };
+
+
+const getVgById = async (id) => {
+   const exist = await Videogames.findByPk(id, {
+      include: [{ model: Genres }]
+   });
+   if (exist) return exist;
+   else return {};
+};
+
 module.exports = {
    getAllVg,
-   getVgByName
+   getVgByName,
+   getVgById
 };
