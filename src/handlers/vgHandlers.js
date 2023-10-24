@@ -26,7 +26,12 @@ const getVgByIdHandler = async (req, res) => {
    }
 };
 
+const postVgHandler = async (req, res) => {
+
+};
+
 module.exports = {
    getVgHandler,
-   getVgByIdHandler
+   getVgByIdHandler,
+   postVgHandler
 };

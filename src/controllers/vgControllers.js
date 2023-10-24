@@ -2,6 +2,8 @@ const { Op } = require("sequelize");
 const { Videogames, Genres } = require("../db");
 const { infoApiVg } = require("../utils/api");
 
+// const { firestoreDb } = require("../firebase-config");
+
 const createVideogamesAndAssociateGenres = async () => {
    const data = await Videogames.findAll();
    if (data.length === 0) {
@@ -35,6 +37,8 @@ const createVideogamesAndAssociateGenres = async () => {
 createVideogamesAndAssociateGenres();
 
 const getAllVg = async () => {
+   // const querySnapshot = await firestoreDb.collection('users').get();
+   // console.log(querySnapshot.docs[0].data());
    return await Videogames.findAll({
       include: [
          {

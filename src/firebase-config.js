@@ -1,9 +1,19 @@
-const firebase = require("firebase-admin");
+// const firebase = require("firebase-admin");
+require('dotenv').config();
 
-const serviceAccount = require("./private/serviceAccount.json");
+const { initializeApp, applicationDefault } = require("firebase-admin/app");
+const { getFirestore } = require("firebase-admin/firestore");
 
-firebase.initializeApp({
-   credential: firebase.credential.cert(serviceAccount)
+// const serviceAccount = require("./private/serviceAccount.json");
+
+initializeApp({
+   // credential: firebase.credential.cert(serviceAccount)
+   // credential: firebase.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+   credential: applicationDefault(),
 });
 
-module.exports = firebase;
+const firestoreDb = getFirestore();
+firestoreDb.settings({ ignoreUndefinedProperties: true });
+// console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+
+module.exports = { firestoreDb };
