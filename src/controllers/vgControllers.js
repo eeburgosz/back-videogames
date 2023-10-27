@@ -8,6 +8,7 @@ const createVideogamesAndAssociateGenres = async () => {
    const data = await Videogames.findAll();
    if (data.length === 0) {
       const vgData = await infoApiVg();
+      // console.log(vgData);
       try {
          const vgInstances = await Videogames.bulkCreate(vgData);
          const genresMap = new Map();

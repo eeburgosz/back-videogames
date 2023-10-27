@@ -1,6 +1,5 @@
 const { firestoreDb } = require("../firebase-config");
 
-
 const getUsersController = async () => {
    const querySnapshot = await firestoreDb.collection('users').get();
    return querySnapshot.docs.map(doc => ({
@@ -10,9 +9,10 @@ const getUsersController = async () => {
 
 };
 
+
 const postUserController = async (firstName, lastName, email) => {
    return await firestoreDb.collection('users').add({
-      firstName, lastName, email
+      firstName, lastName, email,
    });
 };
 
