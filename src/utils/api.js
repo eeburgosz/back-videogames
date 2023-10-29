@@ -13,7 +13,7 @@ const infoApiVg = async () => {
    const noInfo = "No information available";
    const apiData = [];
    let URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
-   for (let i = 0; i < 5; i++) {
+   for (let i = 0; i < 8; i++) {
       const { results, next } = (await axios.get(URL)).data;
       results.map(async vg => {
          const descURL = `https://api.rawg.io/api/games/${vg.id}?key=${API_KEY}`;

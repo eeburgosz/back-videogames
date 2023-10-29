@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
 const { Videogames, Genres } = require("../db");
-const { infoApiVg } = require("../utils/api");
+const { infoApiVg, infoApiPlatforms } = require("../utils/api");
 
 // const { firestoreDb } = require("../firebase-config");
 
@@ -8,7 +8,6 @@ const createVideogamesAndAssociateGenres = async () => {
    const data = await Videogames.findAll();
    if (data.length === 0) {
       const vgData = await infoApiVg();
-      // console.log(vgData);
       try {
          const vgInstances = await Videogames.bulkCreate(vgData);
          const genresMap = new Map();
@@ -40,6 +39,7 @@ createVideogamesAndAssociateGenres();
 const getAllVg = async () => {
    // const querySnapshot = await firestoreDb.collection('users').get();
    // console.log(querySnapshot.docs[0].data());
+   // console.log(await infoApiPlatforms());
    return await Videogames.findAll({
       include: [
          {
@@ -79,3 +79,4 @@ module.exports = {
    getVgByName,
    getVgById
 };
+
