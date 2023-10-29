@@ -3,7 +3,7 @@ const VideogamesModel = require("./models/Videogames");
 const GenresModel = require("./models/Genres");
 require('dotenv').config();
 
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL, DATABASE_PASSWORD, DATABASE_USER } = process.env;
 
 const sequelize = process.env.NODE_ENV === 'production' ?
 
