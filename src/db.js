@@ -5,7 +5,25 @@ require('dotenv').config();
 
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(`
+const sequelize = process.env.NODE_ENV === 'production' ?
+
+   new Sequelize(`postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_URL}/videogames`, {
+      logging: false,
+      dialect: "postgres",
+      native: false,
+      ssl: true,
+      dialectOptions: {
+         ssl: {
+            require: true,
+            rejectUnauthorized: false
+         },
+         keepAlive: true
+      }
+   })
+
+   :
+
+   new Sequelize(`
    postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames
 `, { logging: false });
 
