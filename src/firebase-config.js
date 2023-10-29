@@ -1,14 +1,14 @@
 // const firebase = require("firebase-admin");
 require('dotenv').config();
-const { GOOGLE_APPLICATION_CREDENTIALS } = process.env;
+const serviceAccount = require("./private/serviceAccount.json");
 
-const { initializeApp, applicationDefault } = require("firebase-admin/app");
+const { initializeApp } = require("firebase-admin/app");
 const firebase = require("firebase-admin");
 const { getFirestore } = require("firebase-admin/firestore");
 
 
 initializeApp({
-   credential: firebase.credential.cert(GOOGLE_APPLICATION_CREDENTIALS),
+   credential: firebase.credential.cert(serviceAccount),
 });
 
 const firestoreDb = getFirestore();
