@@ -95,7 +95,6 @@ const createVideogame = async (
 		img,
 		released,
 		description,
-		genres,
 		platforms,
 		ratings,
 		requirements,
