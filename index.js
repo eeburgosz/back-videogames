@@ -5,6 +5,6 @@ require("dotenv").config();
 const { PORT } = process.env;
 
 app.listen(PORT, () => {
-	sequelize.sync({ alter: true });
+	sequelize.sync({ force: true });
 	console.log(`Aplicación corriendo en el puerto ${PORT}`);
 });
