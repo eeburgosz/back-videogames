@@ -1,8 +1,6 @@
 const { Op } = require("sequelize");
 const { Videogames, Genres } = require("../db");
-const { infoApiVg, infoApiPlatforms } = require("../utils/api");
-
-// const { firestoreDb } = require("../firebase-config");
+const { infoApiVg } = require("../utils/api");
 
 const createVideogamesAndAssociateGenres = async () => {
 	const data = await Videogames.findAll();

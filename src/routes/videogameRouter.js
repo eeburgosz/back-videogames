@@ -1,16 +1,7 @@
 const { Router } = require("express");
-const {
-	postVgHandler,
-	getVgByIdHandler,
-	postUserHandler,
-} = require("../handlers/vgHandlers");
-const { checkActiveUser } = require("../middlewares/auth");
+const { postVgHandler, getVgByIdHandler } = require("../handlers/vgHandlers");
 
 const videogameRouter = Router();
-
-// videogameRouter.post("/create", async (req, res) => {
-// 	console.log(req.body);
-// });
 
 videogameRouter.get("/:id", getVgByIdHandler);
 videogameRouter.post("/create", postVgHandler);
