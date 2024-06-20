@@ -30,7 +30,6 @@ const getVgByIdHandler = async (req, res) => {
 };
 
 const postVgHandler = async (req, res) => {
-	console.log(req.body);
 	const {
 		name,
 		img,
