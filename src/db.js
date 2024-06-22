@@ -31,7 +31,11 @@ GenresModel(sequelize);
 
 const { Videogames, Genres } = sequelize.models;
 
-const VgGenres = sequelize.define("VgGenres", {}, { timestamps: false });
+const VgGenres = sequelize.define(
+	"VgGenres",
+	{},
+	{ timestamps: false, schema: "videogames_schema" }
+);
 Videogames.belongsToMany(Genres, { through: VgGenres });
 Genres.belongsToMany(Videogames, { through: VgGenres });
 
